@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>数字の出現回数カウンター</title>
+    <style>
+        body { font-family: Arial, sans-serif; text-align: center; margin: 20px; }
+        textarea { width: 80%; height: 100px; }
+        button { margin-top: 10px; padding: 10px; cursor: pointer; }
+        #output { margin-top: 20px; font-size: 18px; white-space: pre-line; }
+    </style>
+</head>
+<body>
+
+    <h2>数字の出現回数カウンター</h2>
+    <p>コンマ（`,`）で区切られた数字を入力してください:</p>
+    <textarea id="inputText"></textarea><br>
+    <button onclick="countNumbers()">カウント</button>
+
+    <h3>出現回数</h3>
+    <div id="output"></div>
+
+    <script>
+        function countNumbers() {
+            let input = document.getElementById("inputText").value;
+            let numbers = input.split(",").map(num => num.trim()).filter(num => num !== ""); // 分割＆空白除去
+            let counts = {};
+
+            // 出現回数をカウント
+            numbers.forEach(num => {
+                counts[num] = (counts[num] || 0) + 1;
+            });
+
+            // 結果を表示
+            let resultText = "";
+            for (let num in counts) {
+                resultText += `${num}: ${counts[num]}回\n`;
+            }
+            document.getElementById("output").textContent = resultText || "データがありません";
+        }
+    </script>
+
+</body>
+</html>
